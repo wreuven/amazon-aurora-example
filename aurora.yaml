@@ -48,10 +48,7 @@ Parameters:
   ProjectTag:
     Type: String
     Description: Tag to apply to created resources for visibility
-    Default: DbDevelopment
-  SubnetPrivateA: 
-    Description: "First private subnet"
-    Type: "AWS::EC2::Subnet::Id"
+    Default: DB_Development
 
 Resources:
   DBAuroraOne:
