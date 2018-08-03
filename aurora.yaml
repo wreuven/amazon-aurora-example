@@ -55,7 +55,7 @@ Resources:
     Type: "AWS::RDS::DBParameterGroup"
     Properties: 
       Description: Parameter group for RDS cluster
-      Family: manfred9.6
+      Family: aurora-postgresql9.6
       Tags:
         - Key: Project
           Value: !Ref ProjectTag
@@ -65,7 +65,6 @@ Resources:
     Properties:
       Engine: aurora-postgresql
       DBInstanceClass: !Ref DbInstanceSize
-      DBSubnetGroupName: !Ref DBSubnets
       DBParameterGroupName: !Ref DBParamGroup
       Tags:
         - Key: Project
