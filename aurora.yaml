@@ -51,6 +51,14 @@ Parameters:
     Default: DB_Development
 
 Resources:
+  DBParamGroup:
+    Type: "AWS::RDS::DBParameterGroup"
+    Properties: 
+      Description: Parameter group for RDS cluster
+      Family: manfred9.6
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectTag
   DBAuroraOne:
     Type : "AWS::RDS::DBInstance"
     DependsOn: DBParamGroup
@@ -62,13 +70,6 @@ Resources:
       Tags:
         - Key: Project
           Value: !Ref ProjectTag
-  DBParamGroup:
-    Type: "AWS::RDS::DBParameterGroup"
-    Properties: 
-      Description: Parameter group for RDS cluster
-      Family: manfred9.6
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
+
 
 Outputs:
