@@ -48,74 +48,20 @@ Parameters:
   ProjectTag:
     Type: String
     Description: Tag to apply to created resources for visibility
-    Default: PgPoolDemo
+    Default: DbDevelopment
   SubnetPrivateA: 
     Description: "First private subnet"
     Type: "AWS::EC2::Subnet::Id"
-  SubnetPrivateB: 
-    Description: "Second private subnet"
-    Type: "AWS::EC2::Subnet::Id"
-  DBFirewall:
-    Type: String
+
 Resources:
-  DBAuroraCluster:
-    Type: "AWS::RDS::DBCluster"
-    DependsOn: DBClusterParams
-    Properties:
-      DatabaseName: !Ref DatabaseName
-      Engine: aurora-postgresql
-      MasterUsername: !Ref DatabaseUser
-      MasterUserPassword: !Ref DatabasePassword
-      DBSubnetGroupName: !Ref DBSubnets
-      DBClusterParameterGroupName: !Ref DBClusterParams
-      VpcSecurityGroupIds: 
-        - !Ref DBFirewall
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
   DBAuroraOne:
     Type : "AWS::RDS::DBInstance"
     DependsOn: DBParamGroup
     Properties:
-      DBClusterIdentifier: !Ref DBAuroraCluster
       Engine: aurora-postgresql
       DBInstanceClass: !Ref DbInstanceSize
       DBSubnetGroupName: !Ref DBSubnets
       DBParameterGroupName: !Ref DBParamGroup
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
-  DBAuroraTwo:
-    Type : "AWS::RDS::DBInstance"
-    DependsOn: DBParamGroup
-    Properties:
-      DBClusterIdentifier: !Ref DBAuroraCluster
-      Engine: aurora-postgresql
-      DBInstanceClass: !Ref DbInstanceSize
-      DBSubnetGroupName: !Ref DBSubnets
-      DBParameterGroupName: !Ref DBParamGroup
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
-  DBAuroraThree:
-    Type : "AWS::RDS::DBInstance"
-    DependsOn: DBParamGroup
-    Properties:
-      DBClusterIdentifier: !Ref DBAuroraCluster
-      Engine: aurora-postgresql
-      DBInstanceClass: !Ref DbInstanceSize
-      DBSubnetGroupName: !Ref DBSubnets
-      DBParameterGroupName: !Ref DBParamGroup
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
-  DBSubnets:
-    Type: "AWS::RDS::DBSubnetGroup"
-    Properties: 
-      DBSubnetGroupDescription: "Subnets for RDS cluster"
-      SubnetIds:
-        - !Ref SubnetPrivateA
-        - !Ref SubnetPrivateB
       Tags:
         - Key: Project
           Value: !Ref ProjectTag
@@ -127,22 +73,5 @@ Resources:
       Tags:
         - Key: Project
           Value: !Ref ProjectTag
-  DBClusterParams:
-    Type: "AWS::RDS::DBClusterParameterGroup"
-    Properties: 
-      Description: Parameter group for RDS cluster
-      Family: manfred9.6
-      Parameters:
-        timezone: "UTC"
-      Tags:
-        - Key: Project
-          Value: !Ref ProjectTag
-  
 
 Outputs:
-  DBClusterEndpoint:
-    Description: Aurora cluster endpoint
-    Value: !GetAtt DBAuroraCluster.Endpoint.Address
-  DBReadEndpoint:
-    Description: Aurora cluster read endpoint
-    Value: !GetAtt DBAuroraCluster.ReadEndpoint.Address
