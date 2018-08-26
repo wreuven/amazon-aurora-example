@@ -1,17 +1,10 @@
-## Amazon Aurora Pgpool example
+## Amazon Aurora example
 
-A set of CloudFormation templates that demonstrates using pgool middleware to provide a single endpoint for both the primary and read replica instances of an Amazon Aurora PostgreSQL-compatible cluster.
+A set of CloudFormation templates that:
 
-These CloudFormation (CFN) templates deploy an Aurora RDS PostgreSQL-compatible
-cluster with pgpool middleware. pgpool offers a single endpoint that directs traffic
-to the RDS cluster endpoint for writes and the RDS reader endpoint for reads.
-
-The templates also set up a VPC with public and private subnets, security groups that 
-limit communication, and an ELB to expose the pgpool instance externally.
-
-## License Summary
-
-This sample code is made available under a modified MIT license. See the LICENSE file.
+1) deploy an Aurora RDS PostgreSQL-compatible cluster 
+2) set up a VPC with public and private subnets
+3) security groups that 
 
 ## Setup
 
@@ -25,7 +18,6 @@ change the `AllowedCidrIngress` from the default of `0.0.0.0/0`.
 ## Create the CFN stack
 
 Run:
-
     ./create.sh templatebucket pgpool pgpoolstack us-west-2
 
 Use your AWS region of choice if you don't want to run in `us-west-2`.
