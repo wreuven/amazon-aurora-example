@@ -1,4 +1,4 @@
-## Amazon Aurora example
+## ApiGateway Cognito Aurora PostgresQL Lambda
 
 A set of CloudFormation templates that:
 
